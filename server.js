@@ -12,10 +12,11 @@ app.use(express.json());
 
 // ✅ Allow your Vercel frontend to access backend
 app.use(cors({
-  origin: ["https://chatbot-frontend-seven-plum.vercel.app"], // your actual frontend
+  origin: (origin, callback) => callback(null, true), // Allow all origins
   methods: ["GET", "POST"],
   allowedHeaders: ["Content-Type"],
 }));
+
 
 const PORT = process.env.PORT || 5000;  // ✅ Railway dynamic port
 const GEMINI_KEY = process.env.GEMINI_API_KEY;
