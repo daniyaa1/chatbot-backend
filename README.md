@@ -1,81 +1,82 @@
-Ementora Chatbot Backend
-This is the backend of the Ementora Chatbot, built with Node.js + Express.
-It connects the frontend to Google Gemini 1.5 API and returns AI-powered responses to user messages.
+# Ementora Chatbot – Backend
 
-🚀 Live Backend
-🔗 https://chatbot-backend-jtq7.onrender.com/
+Node.js + Express API that powers the Ementora AI chat. It receives messages from the frontend and responds using Google Gemini via the Generative Language API.
 
-Root / → Health check endpoint
+## 🧩 Overview
 
-POST /chat → Accepts user messages and returns AI responses
+Endpoints:
 
-🖥️ Tech Stack
-Node.js 20 – Runtime environment
+- `GET /` — health check
+- `POST /chat` — accepts `{ message: string }` and returns `{ reply: string }`
 
-Express 5 – Backend framework
+Features:
 
-Axios – For API requests to Google Gemini
+- CORS enabled
+- Optional `faq.json` for quick answers to common questions
+- Uses the `gemini-flash-latest` model alias for forward compatibility
 
-CORS – To allow frontend access
+## 🖥️ Tech Stack
 
-dotenv – For environment variables
+- Node.js + Express
+- Axios (HTTP client)
+- dotenv (env management)
+- CORS
 
-Render – Deployment platform for backend
+## ⚙️ Environment Variables
 
-⚙️ Features
-✅ REST API endpoint /chat to handle messages
+Create a `.env` file (not committed):
 
-✅ Integrates with Google Gemini 1.5 Flash model
+```bash
+GEMINI_API_KEY=your_gemini_api_key
+PORT=5050
+```
 
-✅ Supports FAQ-based quick replies if faq.json exists
+Do not commit secrets or deployment URLs to the repository. Configure environment variables in your hosting platform.
 
-✅ Fully deployed and connected to frontend
+## 🛠️ Run Locally
 
-🛠️ Local Development
-Follow these steps to run the backend locally:
+```bash
+# 1) Clone
+git clone <your-backend-repo-url>
+cd chatbot-backend
 
-bash
-Copy
-Edit
-# 1️⃣ Clone the repository
-git clone <your-backend-repo-link>.git
-cd backend
-
-# 2️⃣ Install dependencies
+# 2) Install deps
 npm install
 
-# 3️⃣ Create a .env file with your Gemini API key
-GEMINI_API_KEY=your_real_gemini_api_key_here
+# 3) Configure env
+echo "GEMINI_API_KEY=your_gemini_api_key" > .env
+echo "PORT=5050" >> .env
 
-# 4️⃣ Start the server
-npm start
-The server will run locally at:
+# 4) Start the server
+node server.js
+# Server runs at http://localhost:5050
+```
 
-arduino
-Copy
-Edit
-http://localhost:5000
-✅ Test Chat Endpoint
-Send a test message with cURL:
+Test endpoint:
 
-bash
-Copy
-Edit
-curl -X POST http://localhost:5000/chat \
--H "Content-Type: application/json" \
--d '{"message":"Hello"}'
-Expected response:
+```bash
+curl -X POST http://localhost:5050/chat \
+	-H "Content-Type: application/json" \
+	-d '{"message":"Hello"}'
+```
 
-json
-Copy
-Edit
-{ "reply": "Hello there! How can I help you today?" }
-📡 Frontend Integration
-The frontend is deployed at:
+## 🌐 Deploy
 
-arduino
-Copy
-Edit
-https://chatbot-frontend-seven-plum.vercel.app/
-📄 License
-This backend is created for learning and demonstration purposes.
+You can deploy on platforms like Railway, Render, Fly.io, etc.
+
+Typical steps:
+
+1. Push the repo to GitHub.
+2. Create a new service in your platform of choice.
+3. Set environment variables (e.g., `GEMINI_API_KEY`, `PORT`).
+4. Deploy.
+
+## 🔒 Security Notes
+
+- Never commit `.env` files.
+- Avoid hardcoding any backend URL into public repos.
+- Rate limits and model availability may change; using `gemini-flash-latest` helps stay compatible.
+
+## 📄 License & Notes
+
+For learning and demonstration purposes. Configure environment variables per environment; do not expose private URLs.
