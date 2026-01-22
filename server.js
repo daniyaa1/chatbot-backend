@@ -50,7 +50,8 @@ app.post("/chat", async (req, res) => {
     const systemInstruction = "You are Ementora AI, a helpful assistant for the Ementora platform. You ONLY answer questions related to Ementora. If a user asks about anything else (like general knowledge, math, history, or other topics), politely decline and say you can only assist with Ementora-related queries. Keep your answers complete but concise.";
     
     const response = await axios.post(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent?key=${GEMINI_KEY}`,
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${GEMINI_KEY}`,
+
       {
         contents: [{ role: "user", parts: [{ text: `${systemInstruction}\n\nUser Question: ${message}` }] }],
         generationConfig: { maxOutputTokens: 300, temperature: 0.7 }
